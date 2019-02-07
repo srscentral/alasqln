@@ -1,60 +1,33 @@
 {
-  "_from": "alasqln",
-  "_id": "alasqln@0.4.11",
-  "_inBundle": false,
-  "_integrity": "sha512-U1x1+NjIiG24crW34OwB3I8mpl0s0gS8xUcZ6unddLkRWaIWV/R/dqc/zTKwoE0YDwss0yI05WOYg5Psb62VRA==",
-  "_location": "/alasqln",
-  "_phantomChildren": {
-    "cliui": "3.2.0",
-    "decamelize": "1.2.0",
-    "get-caller-file": "1.0.3",
-    "lodash.assign": "4.2.0",
-    "os-locale": "1.4.0",
-    "read-pkg-up": "1.0.1",
-    "require-directory": "2.1.1",
-    "require-main-filename": "1.0.1",
-    "set-blocking": "2.0.0",
-    "string-width": "1.0.2",
-    "which-module": "1.0.0",
-    "window-size": "0.2.0"
-  },
-  "_requested": {
-    "type": "tag",
-    "registry": true,
-    "raw": "alasqln",
-    "name": "alasqln",
-    "escapedName": "alasqln",
-    "rawSpec": "",
-    "saveSpec": null,
-    "fetchSpec": "latest"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/alasqln/-/alasqln-0.4.11.tgz",
-  "_shasum": "4e076b102effb6caaf6d66474d467ddf8bedc9ee",
-  "_spec": "alasqln",
-  "_where": "/var/www/html/angular-7-registration-login-example-cli",
-  "author": {
-    "name": "Andrey Gershun",
-    "email": "agershun@gmail.com"
-  },
-  "bin": {
-    "alasqln": "./bin/alasqln-cli.js",
-    "alaserver": "./bin/alaserver.js"
-  },
-  "browser": "dist/alasqln.min.js",
-  "bugs": {
-    "url": "https://github.com/agershun/alasqln/issues"
-  },
-  "bundleDependencies": false,
+  "name": "alasqln",
+  "description": "Use SQL to select and filter javascript data - including relational joins and search in nested objects (JSON). Export to and import from Excel and CSV",
+  "version": "0.4.11",
+  "author": "Andrey Gershun <agershun@gmail.com>",
   "contributors": [
-    {
-      "name": "Mathias Rangel Wulff",
-      "email": "m@rawu.dk"
-    }
+    "Mathias Rangel Wulff <m@rawu.dk>"
   ],
+  "main": "dist/alasqln.fs.js",
+  "browser": "dist/alasqln.min.js",
+  "directories": {
+    "test": "test"
+  },
+  "typings": "dist/alasqln.d.ts",
+  "scripts": {
+    "test": "npm run build && cd test && mocha . --reporter dot",
+    "test:this": "gulp && cd test && mocha",
+    "test:only": "cd test && mocha . --reporter dot",
+    "test:browser": "node test/browserTestRunner.js 7387",
+    "test:cover": "istanbul cover  -x 'lib/zt/zt.js' --dir test/coverage _mocha",
+    "build": "npm run format:src && gulp",
+    "build:jison": "gulp --jison && gulp",
+    "build:watch": "gulp watch",
+    "bump": "mversion --no-prefix",
+    "uptodate": "npm-check -u --skip-unused",
+    "release": "f='/tmp/alasqln.tmp' && curl https://raw.githubusercontent.com/wiki/agershun/alasqln/How-to-release.md > $f && sh $f ; rm $f",
+    "jison": "jison ./src/alasqlnparser.jison -o ./src/alasqlnparser.js",
+    "format:src": "prettier src/*.js --write",
+    "format:test": "prettier test/*.js --write"
+  },
   "dependencies": {
     "dom-storage": "^2.0.1",
     "es6-promise": "^4.2.2",
@@ -63,8 +36,6 @@
     "xlsx": "^0.13.2",
     "yargs": "^5.0.0"
   },
-  "deprecated": false,
-  "description": "Use SQL to select and filter javascript data - including relational joins and search in nested objects (JSON). Export to and import from Excel and CSV",
   "devDependencies": {
     "blueimp-md5": "^2.10.0",
     "eslint": "^4.19.1",
@@ -95,12 +66,20 @@
     "tabletop": "^1.5.2",
     "uglify-js": "^3.3.7"
   },
-  "directories": {
-    "test": "test"
-  },
   "engines": [
     "node"
   ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/agershun/alasqln.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agershun/alasqln/issues"
+  },
+  "bin": {
+    "alasqln": "./bin/alasqln-cli.js",
+    "alaserver": "./bin/alaserver.js"
+  },
   "homepage": "https://github.com/agershun/alasqln",
   "keywords": [
     "SQL",
@@ -112,28 +91,6 @@
     "CSV"
   ],
   "license": "MIT",
-  "main": "dist/alasqln.fs.js",
-  "name": "alasqln",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/agershun/alasqln.git"
-  },
-  "scripts": {
-    "build": "npm run format:src && gulp",
-    "build:jison": "gulp --jison && gulp",
-    "build:watch": "gulp watch",
-    "bump": "mversion --no-prefix",
-    "format:src": "prettier src/*.js --write",
-    "format:test": "prettier test/*.js --write",
-    "jison": "jison ./src/alasqlnparser.jison -o ./src/alasqlnparser.js",
-    "release": "f='/tmp/alasqln.tmp' && curl https://raw.githubusercontent.com/wiki/agershun/alasqln/How-to-release.md > $f && sh $f ; rm $f",
-    "test": "npm run build && cd test && mocha . --reporter dot",
-    "test:browser": "node test/browserTestRunner.js 7387",
-    "test:cover": "istanbul cover  -x 'lib/zt/zt.js' --dir test/coverage _mocha",
-    "test:only": "cd test && mocha . --reporter dot",
-    "test:this": "gulp && cd test && mocha",
-    "uptodate": "npm-check -u --skip-unused"
-  },
   "testling": {
     "browsers": [
       "ie/6..latest",
@@ -146,6 +103,5 @@
       "android-browser/4..latest"
     ]
   },
-  "typings": "./dist/alasqln.d.ts",
-  "version": "0.4.11"
+  "typings": "./dist/alasqln.d.ts"
 }
